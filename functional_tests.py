@@ -11,6 +11,11 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def check_for_row_in_list_table(self, row_text):
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(row_text, [row.text for row in rows])
+
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edit has heard about a cool new online to-do app. She checks
         # its homepage
@@ -35,10 +40,7 @@ class NewVisitorTest(unittest.TestCase):
         # "1: Buy GE 999 manga" as a to-do list item
         input_box.send_keys(Keys.ENTER)
         time.sleep(1)
-
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Buy GE 999 manga', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy GE 999 manga')
 
         # There is still a text box inviting her to add another item.
         # She enters "Watch accompanying anime"
@@ -48,9 +50,8 @@ class NewVisitorTest(unittest.TestCase):
         time.sleep(1)
 
         # Page updates again, now shows both items on her list
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('2: Watch accompanying anime', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy GE 999 manga')
+        self.check_for_row_in_list_table('2: Watch accompanying anime')
 
         # Edith wonders whether the site will remember her list.
         # Then she sees that the site has generated a unique URL for her --
