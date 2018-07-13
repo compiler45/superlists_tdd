@@ -110,7 +110,7 @@ class NewVisitorTest(LiveServerTestCase):
         input_box = self.browser.find_element_by_id('id_new_item')
         input_box.send_keys('Buy NAVI')
         input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('Buy NAVI')
+        self.wait_for_row_in_list_table('1. Buy NAVI')
 
         # Eri gets his own URL
         eri_list_url = self.browser.current_url
