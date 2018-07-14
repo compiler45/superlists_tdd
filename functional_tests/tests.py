@@ -1,3 +1,4 @@
+import os
 import unittest
 import time
 from selenium import webdriver
@@ -8,9 +9,13 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 MAX_WAIT = 10
 
+
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://{}'.format(staging_server)
 
     def tearDown(self):
         self.browser.quit()
@@ -28,7 +33,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
                     raise e
                 time.sleep(0.5)
 
-    def test_can_start_a_list_and_retrieve_it_later(self):
+    def test_can_start_a_list_for_one_user(self):
         # Lain has heard about a cool new online to-do app. She checks
         # its homepage
         self.browser.get(self.live_server_url)
@@ -69,15 +74,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         # She visits the URL - her to-do list is still there.
         self.fail('Finish the test!')
-
-    def test_can_start_a_list_for_one_user(self):
-        # Lain has heard about a cool new online to-do app, she goes to
-        # [...]
-        # page updates, shows both items in her list
-        self.wait_for_row_in_list_table('2: Watch accompanying anime')
-        self.wait_for_row_in_list_table('1: Buy GE 999 manga')
-
-        # Satisfied, she immerses herself in the Wired late at night
 
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Lain starts a new to-do list
