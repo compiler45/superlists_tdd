@@ -20,7 +20,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('To-Do', header_text)
 
         # She is invited to enter a to-do item straight away
-        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box = self.get_item_input_box()
         self.assertEqual(
             input_box.get_attribute('placeholder'),
             'Enter a to-do item'
@@ -36,7 +36,7 @@ class NewVisitorTest(FunctionalTest):
 
         # There is still a text box inviting her to add another item.
         # She enters "Watch accompanying anime"
-        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box = self.get_item_input_box()
         input_box.send_keys('Watch accompanying anime')
         input_box.send_keys(Keys.ENTER)
 
@@ -53,7 +53,7 @@ class NewVisitorTest(FunctionalTest):
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Lain starts a new to-do list
         self.browser.get(self.live_server_url)
-        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box = self.get_item_input_box()
         input_box.send_keys('Buy GE 999 manga')
         input_box.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy GE 999 manga')
@@ -79,7 +79,7 @@ class NewVisitorTest(FunctionalTest):
         # Eri starts a new list by entering a new item He
         # is less interesting than Lain
 
-        input_box = self.browser.find_element_by_id('id_new_item')
+        input_box = self.get_item_input_box()
         input_box.send_keys('Buy NAVI')
         input_box.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: Buy NAVI')
