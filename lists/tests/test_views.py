@@ -1,8 +1,11 @@
+from unittest import skip
+
 from django.test import TestCase
 from django.utils.html import escape
 
 from lists.models import Item, List
-from lists.forms import ItemForm, EMPTY_ITEM_ERROR
+from lists.forms import (ItemForm, ExistingListItemForm, EMPTY_ITEM_ERROR,
+                         DUPLICATE_ITEM_ERROR)
 
 # Create your tests here.
 
