@@ -7,4 +7,4 @@ An application for creating To-Do Lists.
 
 ### Where can I use it?
  
- I have deployed a live version running on Digital Ocean servers, it can be accessed at http://superlists.jluweb.uk/
+ I have deployed a live version running on Digital Ocean servers, it can be accessed at http://superlists.jluweb.uk/ (will perhaps work on getting https working here...)
