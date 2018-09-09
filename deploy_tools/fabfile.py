@@ -23,8 +23,8 @@ def _update_settings(source_folder, site_name):
     settings_path = source_folder + '/superlists/settings.py'
     sed(settings_path, "DEBUG = True", "DEBUG = False")
     sed(settings_path,
-        'ALLOWED_HOSTS=.+$',
-        f'ALLOWED_HOSTS=["{site_name}"]')
+        'ALLOWED_HOSTS = .+$',
+        f'ALLOWED_HOSTS = ["{site_name}"]')
 
     secret_key_file = source_folder + '/superlists/secret_key.py'
     if not exists(secret_key_file):
