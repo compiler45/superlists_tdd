@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 # prevent update last login signal
-# auth.signals.user_logged_in.disconnect(auth.models.update_last_login)
+auth.signals.user_logged_in.disconnect(auth.models.update_last_login)
 
 
 class User(models.Model):
