@@ -5,7 +5,8 @@ Description=Gunicorn server for SITENAME
 Restart=on-failure
 User=tetsuro
 WorkingDirectory=/home/tetsuro/sites/SITENAME/source/
-ExecStart=/home/tetsuro/sites/SITENAME/virtualenv/bin/gunicorn --bind unix:/tmp/SITENAME.socket superlists.wsgi:application
+Environment="MAIL_USERNAME=abraham.program@gmail.com" "MAIL_PASSWORD=SEKRIT"
+ExecStart=/home/tetsuro/sites/SITENAME/virtualenv/bin/gunicorn --bind unix:/tmp/SITENAME.socket --access-log-file=../access.log --error-logfile=../error.log superlists.wsgi:application
 
 [Install]
 WantedBy=multi-user.target

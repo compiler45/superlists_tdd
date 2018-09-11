@@ -21,6 +21,7 @@ sudo apt-get install nginx git python36 python3.6-venv
 ## Systemd service ##
 
 * see gunicorn-systemd.template.service 
+* replace SEKRIT with mail password
 * replace SITENAME with subdomain name
 
 ## Folder structure: ##
