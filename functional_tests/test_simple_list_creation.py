@@ -27,18 +27,13 @@ class NewVisitorTest(FunctionalTest):
         )
 
         # types "Buy GE 999 manga" into a text box
-        input_box.send_keys('Buy GE 999 manga')
-
         # She hits enter, the page updates, and now the page lists
         # "1: Buy GE 999 manga" as a to-do list item
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy GE 999 manga')
+        self.add_list_item('Buy GE 999 manga')
 
         # There is still a text box inviting her to add another item.
         # She enters "Watch accompanying anime"
-        input_box = self.get_item_input_box()
-        input_box.send_keys('Watch accompanying anime')
-        input_box.send_keys(Keys.ENTER)
+        self.add_list_item('Watch accompanying anime')
 
         # Page updates again, now shows both items on her list
         self.wait_for_row_in_list_table('2: Watch accompanying anime')
@@ -53,10 +48,7 @@ class NewVisitorTest(FunctionalTest):
     def test_multiple_users_can_start_lists_at_different_urls(self):
         # Lain starts a new to-do list
         self.browser.get(self.live_server_url)
-        input_box = self.get_item_input_box()
-        input_box.send_keys('Buy GE 999 manga')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy GE 999 manga')
+        self.add_list_item('Buy GE 999 manga')
 
         # notices that her list has a unique URL
         lain_list_url = self.browser.current_url
@@ -79,10 +71,7 @@ class NewVisitorTest(FunctionalTest):
         # Eri starts a new list by entering a new item He
         # is less interesting than Lain
 
-        input_box = self.get_item_input_box()
-        input_box.send_keys('Buy NAVI')
-        input_box.send_keys(Keys.ENTER)
-        self.wait_for_row_in_list_table('1: Buy NAVI')
+        self.add_list_item('Buy NAVI')
 
         # Eri gets his own URL
         eri_list_url = self.browser.current_url
